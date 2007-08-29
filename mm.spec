@@ -5,7 +5,7 @@ Summary:	OSSP mm (Shared Memory Allocation)
 Name:		mm
 Version:	1.4.2
 Release:	%mkrel 2
-Group:		Development/Libraries
+Group:		System/Libraries
 License:	BSD-Style
 URL:		http://www.ossp.org/pkg/lib/mm/
 Source:		ftp://ftp.ossp.org/pkg/lib/mm/mm-%{version}.tar.bz2
@@ -41,7 +41,7 @@ procedure.
 
 %package -n	%{libname}
 Summary:	OSSP mm (Shared Memory Allocation) Library
-Group:		Development/Libraries
+Group:		Development/C
 Obsoletes:	mm
 Provides:	mm = %{version}
 
@@ -70,7 +70,7 @@ procedure.
 
 %package -n	%{libname}-devel
 Summary:	Development files for the OSSP mm (Shared Memory Allocation) Library
-Group:		Development/Libraries
+Group:		Development/C
 Requires:	%{libname} = %{version}
 Obsoletes:	mm-devel
 Provides:	libmm-devel = %{version}
