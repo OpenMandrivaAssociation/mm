@@ -14,7 +14,6 @@ BuildRequires:	multiarch-utils >= 1.0.3
 %endif
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5 >= 1:2.60
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 The MM library is a 2-layer abstraction library which simplifies the usage of
