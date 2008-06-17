@@ -4,7 +4,7 @@
 Summary:	OSSP mm (Shared Memory Allocation)
 Name:		mm
 Version:	1.4.2
-Release:	%mkrel 4
+Release:	%mkrel 5
 Group:		System/Libraries
 License:	BSD-Style
 URL:		http://www.ossp.org/pkg/lib/mm/
