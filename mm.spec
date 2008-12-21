@@ -4,11 +4,12 @@
 Summary:	OSSP mm (Shared Memory Allocation)
 Name:		mm
 Version:	1.4.2
-Release:	%mkrel 5
+Release:	%mkrel 6
 Group:		System/Libraries
 License:	BSD-Style
 URL:		http://www.ossp.org/pkg/lib/mm/
-Source:		ftp://ftp.ossp.org/pkg/lib/mm/mm-%{version}.tar.bz2
+Source0:	ftp://ftp.ossp.org/pkg/lib/mm/mm-%{version}.tar.bz2
+Patch0:		mm-1.4.2-LDFLAGS.diff
 %if %mdkversion >= 1020
 BuildRequires:	multiarch-utils >= 1.0.3
 %endif
@@ -111,6 +112,7 @@ the MM shared memory library.
 %prep
 
 %setup -q
+%patch0 -p0
 
 %build
 
