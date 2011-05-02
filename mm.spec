@@ -4,15 +4,12 @@
 Summary:	OSSP mm (Shared Memory Allocation)
 Name:		mm
 Version:	1.4.2
-Release:	%mkrel 9
+Release:	%mkrel 10
 Group:		System/Libraries
 License:	BSD-Style
 URL:		http://www.ossp.org/pkg/lib/mm/
 Source0:	ftp://ftp.ossp.org/pkg/lib/mm/mm-%{version}.tar.bz2
 Patch0:		mm-1.4.2-LDFLAGS.diff
-%if %mdkversion >= 1020
-BuildRequires:	multiarch-utils >= 1.0.3
-%endif
 BuildRequires:	libtool
 BuildRequires:	autoconf2.5 >= 1:2.60
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
@@ -132,9 +129,7 @@ perl -pi -e "s|/(.*)buildroot||g;" %{buildroot}/usr/bin/mm-config
 
 rm -f %{buildroot}%{_libdir}/*.la
 
-%if %mdkversion >= 1020
 %multiarch_binaries %{buildroot}%{_bindir}/mm-config
-%endif
 
 %if %mdkversion < 200900
 %post -p /sbin/ldconfig -n %{libname}
@@ -154,9 +149,7 @@ rm -rf %{buildroot}
 %files -n %{libname}-devel
 %defattr(-,root,root)
 %doc README LICENSE ChangeLog INSTALL PORTING THANKS
-%if %mdkversion >= 1020
-%multiarch %{multiarch_bindir}/mm-config
-%endif
+%{multiarch_bindir}/mm-config
 %{_bindir}/mm-config
 %{_libdir}/*.so
 %{_includedir}/*
@@ -166,5 +159,3 @@ rm -rf %{buildroot}
 %files -n %{libname}-static-devel
 %defattr(-,root,root)
 %{_libdir}/*.a
-
-
