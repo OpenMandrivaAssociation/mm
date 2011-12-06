@@ -4,15 +4,13 @@
 Summary:	OSSP mm (Shared Memory Allocation)
 Name:		mm
 Version:	1.4.2
-Release:	%mkrel 10
+Release:	11
 Group:		System/Libraries
 License:	BSD-Style
 URL:		http://www.ossp.org/pkg/lib/mm/
 Source0:	ftp://ftp.ossp.org/pkg/lib/mm/mm-%{version}.tar.bz2
 Patch0:		mm-1.4.2-LDFLAGS.diff
-BuildRequires:	libtool
-BuildRequires:	autoconf2.5 >= 1:2.60
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRequires:	autoconf automake libtool
 
 %description
 The MM library is a 2-layer abstraction library which simplifies the usage of
@@ -41,7 +39,7 @@ procedure.
 Summary:	OSSP mm (Shared Memory Allocation) Library
 Group:		Development/C
 Obsoletes:	mm
-Provides:	mm = %{version}
+Provides:	mm = %{version}-%{release}
 
 %description -n %{libname}
 The MM library is a 2-layer abstraction library which simplifies the usage of
@@ -69,32 +67,12 @@ procedure.
 %package -n	%{libname}-devel
 Summary:	Development files for the OSSP mm (Shared Memory Allocation) Library
 Group:		Development/C
-Requires:	%{libname} = %{version}
+Requires:	%{libname} >= %{version}-%{release}
 Obsoletes:	mm-devel
-Provides:	libmm-devel = %{version}
-Provides:	mm-devel = %{version}
+Provides:	libmm-devel = %{version}-%{release}
+Provides:	mm-devel = %{version}-%{release}
 
 %description -n	%{libname}-devel
-The MM library is a 2-layer abstraction library which simplifies the usage of
-shared memory between forked (and this way strongly related) processes under
-Unix platforms. On the first layer it hides all platform dependent
-implementation details (allocation and locking) when dealing with shared
-memory segments and on the second layer it provides a high-level malloc(3)-
-style API for a convenient and well known way to work with data-structures
-inside those shared memory segments.
-
-This package contain files that are needed to develop applications which use
-the MM shared memory library.
-
-%package -n	%{libname}-static-devel
-Group:		Development/C
-Summary:	Development files for the OSSP mm (Shared Memory Allocation) Library
-Requires:	%{libname} = %{version}
-Obsoletes:	mm-static-devel
-Provides:	libmm-static-devel = %{version}
-Provides:	mm-static-devel = %{version}
-
-%description -n	%{libname}-static-devel
 The MM library is a 2-layer abstraction library which simplifies the usage of
 shared memory between forked (and this way strongly related) processes under
 Unix platforms. On the first layer it hides all platform dependent
@@ -127,27 +105,16 @@ rm -rf %{buildroot}
 
 perl -pi -e "s|/(.*)buildroot||g;" %{buildroot}/usr/bin/mm-config
 
-rm -f %{buildroot}%{_libdir}/*.la
 
 %multiarch_binaries %{buildroot}%{_bindir}/mm-config
 
-%if %mdkversion < 200900
-%post -p /sbin/ldconfig -n %{libname}
-%endif
-
-%if %mdkversion < 200900
-%postun -p /sbin/ldconfig -n %{libname}
-%endif
-
-%clean
-rm -rf %{buildroot}
+# cleanup
+rm -f %{buildroot}%{_libdir}/*.*a
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.*
 
 %files -n %{libname}-devel
-%defattr(-,root,root)
 %doc README LICENSE ChangeLog INSTALL PORTING THANKS
 %{multiarch_bindir}/mm-config
 %{_bindir}/mm-config
@@ -155,7 +122,3 @@ rm -rf %{buildroot}
 %{_includedir}/*
 %{_mandir}/man1/*
 %{_mandir}/man3/*
-
-%files -n %{libname}-static-devel
-%defattr(-,root,root)
-%{_libdir}/*.a
