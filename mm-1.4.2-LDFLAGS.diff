@@ -1,0 +1,11 @@
+--- Makefile.in	2006-08-10 21:05:55.000000000 +0200
++++ Makefile.in.oden	2008-12-21 22:25:14.000000000 +0100
+@@ -75,7 +75,7 @@
+ all: $(LIBS) $(MANS) $(TSTS)
+ 
+ libmm.la: $(OBJS)
+-	$(LIBTOOL) --quiet --mode=link $(CC) -o $@ $(OBJS) \
++	$(LIBTOOL) --mode=link $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS) \
+ 	    -rpath $(libdir) -version-info `$(SHTOOL) version -l c -d libtool mm_vers.c`
+ 
+ mm_alloc.c mm_core.c mm_global.c: mm.h mm_vers.c
