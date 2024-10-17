@@ -13,7 +13,7 @@ Version:	1.4.2
 Release:	24
 Group:		System/Libraries
 License:	BSD-Style
-Url:		http://www.ossp.org/pkg/lib/mm/
+Url:		https://www.ossp.org/pkg/lib/mm/
 Source0:	ftp://ftp.ossp.org/pkg/lib/mm/%{name}-%{version}.tar.bz2
 Patch0:		mm-1.4.2-LDFLAGS.diff
 BuildRequires:	libtool
